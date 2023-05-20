@@ -5,7 +5,6 @@ function App() {
   return (
     <>
       <div className="app">
-        <h1>Meu Time</h1>
         <Outlet />
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -6,6 +6,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [APIKey, setAPIKey] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isloading, setIsLoading] = useState(false);
 
   const validateAPIKey = async () => {
     try {
@@ -24,6 +25,7 @@ const Login = () => {
 
       // Check if the response has errors
       if (data.errors.length === 0) {
+        setIsLoading(true);
         setTimeout(() => {
           navigate("/tabelas");
         }, 1000); // Redirect after 1 second
@@ -34,7 +36,8 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <h1>Meu Time</h1>
       <div className="login">
         <h2>login</h2>
         <input

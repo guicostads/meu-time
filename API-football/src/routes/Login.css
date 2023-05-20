@@ -1,30 +1,49 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1.5rem;
+}
+
 .login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    border: 2px solid #64f;
-    background-color: #64f;
-    max-width: 500px;
-    border-radius: .5rem;
-    padding: 2rem;
-    gap: .75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border: 2px solid #64f;
+  background-color: #64f;
+  max-width: 500px;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  gap: 0.75rem;
 }
 
 .login input {
-    width: 90%;
-    padding: .5rem;
+  width: 90%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
 }
 
 .login button {
-    padding: .5rem;
-    background-color: rgb(124, 104, 216);
-    border-radius: .5rem;
-    border: none;
-    cursor: pointer;
+  padding: 0.5rem;
+  background-color: rgb(124, 104, 216);
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  color: white;
 }
 
+
 .login button:hover {
-    filter: brightness(.9);
+  filter: brightness(0.9);
+}
+
+.login a {
+    text-decoration: none;
+    color: rgb(13, 6, 44)
 }
