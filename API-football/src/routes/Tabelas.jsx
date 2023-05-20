@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Tabelas = () => {
+  
   return (
-    <div><h1>Tabelas</h1></div>
+    <div><h1>Escolha um país</h1></div>
   )
 }
 

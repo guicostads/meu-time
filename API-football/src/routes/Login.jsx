@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { APIKeyContext } from "../contexts/APIcontext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [APIKey, setAPIKey] = useState("");
+  const { APIKey, setAPIKey } = useContext(APIKeyContext);
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +43,8 @@ const Login = () => {
         <h2>login</h2>
         <input
           type="text"
-          placeholder="Digite sua API Key"
+          value={APIKey}
+          placeholder="Insira aqui sua sua API Key"
           onChange={(e) => setAPIKey(e.target.value)}
           onClick={() => setErrorMsg("")}
         />
@@ -51,7 +53,7 @@ const Login = () => {
         </button>
         <span>{errorMsg}</span>
         <p>
-          Não possui a chave de acesso? crie sua conta{" "}
+          Não possui a API key? Crie sua conta{" "}
           <a
             href="https://www.api-football.com/pricing"
             target="_blank"

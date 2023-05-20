@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
-import './App.css'
+import { APIKeyContextProvider } from "./contexts/APIcontext";
+import "./App.css";
 
 function App() {
   return (
     <>
       <div className="app">
-        <Outlet />
+        <APIKeyContextProvider>
+          <Outlet />
+        </APIKeyContextProvider>
       </div>
     </>
   );
