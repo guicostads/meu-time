@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -6,9 +6,10 @@ const Login = () => {
   const navigate = useNavigate();
   const [APIKey, setAPIKey] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateAPIKey = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://api-football-v1.p.rapidapi.com/v3/timezone",
@@ -25,13 +26,12 @@ const Login = () => {
 
       // Check if the response has errors
       if (data.errors.length === 0) {
-        setIsLoading(true);
-        setTimeout(() => {
-          navigate("/tabelas");
-        }, 1000); // Redirect after 1 second
+        navigate("/tabelas");
+        setIsLoading(false);
       }
     } catch (err) {
       setErrorMsg("API Key inválida.");
+      setIsLoading(false);
     }
   };
 
@@ -46,7 +46,9 @@ const Login = () => {
           onChange={(e) => setAPIKey(e.target.value)}
           onClick={() => setErrorMsg("")}
         />
-        <button onClick={validateAPIKey}>Acessar</button>
+        <button onClick={validateAPIKey}>
+          {isLoading ? <p className="loader"></p> : <span>Acessar</span>}
+        </button>
         <span>{errorMsg}</span>
         <p>
           Não possui a chave de acesso? crie sua conta{" "}
