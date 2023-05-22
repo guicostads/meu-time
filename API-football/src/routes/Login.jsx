@@ -24,6 +24,7 @@ const Login = () => {
       );
       const data = await response.json();
       console.log(data);
+      console.log(APIKey)
 
       // Check if the response has errors
       if (data.errors.length === 0) {
