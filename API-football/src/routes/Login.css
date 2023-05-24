@@ -30,12 +30,15 @@
 }
 
 .login button {
-  padding: 0.5rem;
+  display: grid;
+  place-items: center;
+  padding: .5rem;
   background-color: rgb(124, 104, 216);
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
   color: white;
+  width: 20%;
 }
 
 .login button:hover {

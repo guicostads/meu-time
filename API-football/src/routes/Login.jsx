@@ -1,47 +1,16 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { APIKeyContext } from "../contexts/APIcontext";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { APIKey, setAPIKey } = useContext(APIKeyContext);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const validateAPIKey = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        "https://api-football-v1.p.rapidapi.com/v3/timezone",
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": APIKey,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      console.log(APIKey)
-
-      // Check if the response has errors
-      if (data.errors.length === 0) {
-        navigate("/tabelas");
-        setIsLoading(false);
-      }
-    } catch (err) {
-      setErrorMsg("API Key inválida.");
-      setIsLoading(false);
-    }
-  };
+  const { APIKey, setAPIKey, validateAPIKey, isLoading, errorMsg, setErrorMsg } =
+    useContext(APIKeyContext);
 
   return (
     <div className="login-container">
       <h1>Meu Time</h1>
       <div className="login">
-        <h2>login</h2>
+        <h2>Login</h2>
         <input
           type="text"
           value={APIKey}

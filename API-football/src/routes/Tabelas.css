@@ -1,0 +1,33 @@
+body {
+  padding: 1rem;
+}
+
+.countries {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  flex: 1 0;
+}
+
+.countries p {
+  background-color: rgb(59, 52, 156);
+  padding: 0.9rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  width: 15rem;
+  font-size: 0.75rem;
+}
+
+.countries p:hover {
+  filter: brightness(0.9);
+}
+
+.leagues {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex: 1 0;
+}
