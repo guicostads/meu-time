@@ -60,16 +60,15 @@ const Tabelas = () => {
             <p>{country.name}</p>
           </div>
         ))}
-        </div>
-        <div className="leagues">
-          {leagues.map((league) => (
-            <div key={league.id}>
-              <p>{league.league.name}</p>
-            </div>
-          ))}
-        </div>
       </div>
-  
+      <div className="leagues">
+        {leagues.map((league) => (
+          <div key={league.id}>
+            <p>{league.league.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 export default Tabelas;
