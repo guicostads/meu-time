@@ -13,7 +13,6 @@ const Login = () => {
         <h2>Login</h2>
         <input
           type="text"
-          value={APIKey}
           placeholder="Insira aqui sua sua API Key"
           onChange={(e) => setAPIKey(e.target.value)}
           onClick={() => setErrorMsg("")}

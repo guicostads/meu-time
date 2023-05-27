@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const APIKeyContext = createContext();
 
 export const APIKeyContextProvider = ({ children }) => {
-  const storedAPIKey = localStorage.getItem("APIKey") || "";
+  const storedAPIKey = sessionStorage.getItem("APIKey") || "";
   const [APIKey, setAPIKey] = useState(storedAPIKey);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -28,7 +28,7 @@ export const APIKeyContextProvider = ({ children }) => {
 
       // Check if the response has errors
       if (data.errors.length === 0) {
-        localStorage.setItem("APIKey", APIKey); // Store the API key
+        sessionStorage.setItem("APIKey", APIKey); // Store the API key in session storage
         navigate("/tabelas");
         setIsLoading(false);
       }
