@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { APIKeyContextProvider } from "./contexts/APIcontext";
+import { APIKeyContextProvider } from "./contexts/APIKeyContext";
+import { ApiProvider } from "./contexts/ApiCallsContext";
 import "./App.css";
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
     <>
       <div className="app">
         <APIKeyContextProvider>
-          <Outlet />
+          <ApiProvider>
+            <Outlet />
+          </ApiProvider>
         </APIKeyContextProvider>
       </div>
     </>
