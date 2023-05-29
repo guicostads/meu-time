@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { APIKeyContext } from "../contexts/APIKeyContext";
 import { ApiContext } from "../contexts/ApiCallsContext";
 import "./Tabelas.css";
 
-
 const Tabelas = () => {
-  const { APIKey } = useContext(APIKeyContext);
-  const { countries,
-    leagues,
-    getCountries,
-    getLeagues,
-    getTeams} = useContext(ApiContext)
+  const { countries, leagues, getCountries, getLeagues, getTeams } =
+    useContext(ApiContext);
 
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
 
-
+  const scrollToLeagues = () => {
+    // Scroll to the element when clicked
+    ref1.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     getCountries();
@@ -24,14 +24,20 @@ const Tabelas = () => {
       <h1>Escolha um país</h1>
       <div className="countries">
         {countries.map((country) => (
-          <div key={country.id} onClick={() => getLeagues(country.name)}>
+          <div
+            key={country.id}
+            onClick={() => {
+              getLeagues(country.name);
+              scrollToLeagues();
+            }}
+          >
             <img src={country.flag} alt="country flag" />
             <p>{country.name}</p>
           </div>
         ))}
       </div>
       {leagues.length !== 0 ? <h1>Leagues</h1> : ""}
-      <div className="leagues">
+      <div className="leagues" ref={ref1}>
         {leagues.map((league) => (
           <div
             key={league.league.id}
