@@ -17,9 +17,9 @@ body {
 .countries {
   display: grid;
   width: 70%;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  
   padding: 1rem;
   margin-top: 1rem;
 }
@@ -39,7 +39,7 @@ body {
 
 .leagues {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   padding: 1rem;
   margin-top: 1rem;

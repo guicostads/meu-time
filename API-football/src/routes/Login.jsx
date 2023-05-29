@@ -3,7 +3,7 @@ import "./Login.css";
 import { APIKeyContext } from "../contexts/APIcontext";
 
 const Login = () => {
-  const { APIKey, setAPIKey, validateAPIKey, isLoading, errorMsg, setErrorMsg } =
+  const { setAPIKey, validateAPIKey, isLoading, errorMsg, setErrorMsg } =
     useContext(APIKeyContext);
 
   return (
