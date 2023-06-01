@@ -54,7 +54,7 @@ export const ApiProvider = ({ children }) => {
   const getTeams = async (leagueId) => {
     try {
       const response = await fetch(
-        `https://v3.football.api-sports.io/teams?league=${leagueId}&season=2023`,
+        `https://api-football-v1.p.rapidapi.com/teams/league/${leagueId}`,
         {
           method: "GET",
           headers: {

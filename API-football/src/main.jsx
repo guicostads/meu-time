@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css";
 import Login from "./routes/Login.jsx";
-import Tabelas from "./routes/Tabelas.jsx";
+import Countries from "./routes/Countries.jsx";
+import Leagues from "./routes/Leagues.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Login /> },
-      { path: "/tabelas", element: <Tabelas /> },
+      { path: "/countries", element: <Countries /> },
+      { path: "/leagues", element: <Leagues /> },
     ],
   },
 ]);

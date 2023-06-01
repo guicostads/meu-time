@@ -29,7 +29,7 @@ export const APIKeyContextProvider = ({ children }) => {
       // Check if the response has errors
       if (data.errors.length === 0) {
         sessionStorage.setItem("APIKey", APIKey); // Store the API key in session storage
-        navigate("/tabelas");
+        navigate("/countries");
         setIsLoading(false);
       }
     } catch (err) {

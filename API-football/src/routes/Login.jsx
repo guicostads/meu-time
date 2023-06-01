@@ -24,7 +24,7 @@ const Login = () => {
         <p>
           Não possui a API key? Crie sua conta{" "}
           <a
-            href="https://www.api-football.com/pricing"
+            href="https://rapidapi.com/auth/sign-up?referral=/api-sports/api/api-football/"
             target="_blank"
             rel="noopener noreferrer"
           >

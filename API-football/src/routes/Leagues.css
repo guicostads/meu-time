@@ -1,0 +1,32 @@
+.leagues-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.leagues {
+  display: grid;
+  border: 3px solid #6464;
+  border-radius: 0.5rem;
+  width: 70%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.leagues p {
+  background-color: rgba(114, 32, 207, 0.133);
+  padding: 0.9rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.leagues img {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+}
