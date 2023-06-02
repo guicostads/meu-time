@@ -9,6 +9,7 @@ export const ApiProvider = ({ children }) => {
   const { APIKey } = useContext(APIKeyContext);
   const [countries, setCountries] = useState([]);
   const [leagues, setLeagues] = useState([]);
+  const [teams, setTeams] = useState([]);
 
   const getCountries = async () => {
     try {
@@ -24,6 +25,7 @@ export const ApiProvider = ({ children }) => {
       );
       const data = await response.json();
       console.log(data.response);
+      // taking the 'null' country off
       data.response.splice(164, 1);
       setCountries(data.response);
     } catch (err) {
@@ -33,6 +35,8 @@ export const ApiProvider = ({ children }) => {
 
   const getLeagues = async (countryName) => {
     try {
+      // need to fix this
+      localStorage.removeItem("leagues"); // Clear the previous leagues data
       const response = await fetch(
         `https://api-football-v1.p.rapidapi.com/v3/leagues?country=${countryName}`,
         {
@@ -46,6 +50,7 @@ export const ApiProvider = ({ children }) => {
       const data = await response.json();
       console.log(data.response);
       setLeagues(data.response);
+      localStorage.setItem("leagues", JSON.stringify(data.response));
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +69,8 @@ export const ApiProvider = ({ children }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
+      console.log(data.api.teams);
+      setTeams(data.api.teams);
     } catch (err) {
       console.log(err);
     }
@@ -73,6 +79,8 @@ export const ApiProvider = ({ children }) => {
   const contextValue = {
     countries,
     leagues,
+    teams,
+    setLeagues,
     getCountries,
     getLeagues,
     getTeams,

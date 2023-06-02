@@ -15,11 +15,10 @@ const Countries = () => {
   return (
     <div className="countries-container">
       <h1>Escolha um país</h1>
-      <div className="countries">
+      <div className="country">
         {countries.map((country) => (
-          <Link to="/leagues">
+          <Link to="/leagues" key={country.name}>
             <div
-              key={country.code}
               onClick={() => {
                 getLeagues(country.name);
               }}

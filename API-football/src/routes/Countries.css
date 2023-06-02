@@ -21,7 +21,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.countries {
+.country {
   display: grid;
   width: 70%;
   border: 3px solid #6464;
@@ -33,14 +33,14 @@ body {
   margin-bottom: 2rem;
 }
 
-.countries p {
-  background-color: rgb(59, 52, 156);
+.country p {
+  background-color: rgba(114, 32, 207, 0.133);
   padding: 0.9rem;
   cursor: pointer;
   border-radius: 0.5rem;
   font-size: 0.75rem;
 }
 
-.countries p:hover {
+.country p:hover {
   filter: brightness(0.9);
 }

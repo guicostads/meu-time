@@ -1,4 +1,4 @@
-.leagues-container {
+.teams-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,7 +6,7 @@
   padding: 1.5rem;
 }
 
-.league {
+.team {
   display: grid;
   border: 3px solid #6464;
   border-radius: 0.5rem;
@@ -17,21 +17,23 @@
   margin-top: 1rem;
 }
 
-.league a {
+.team a {
   text-decoration: none;
   color: #fff;
+  border-bottom: 1px solid #6464;
+  padding: 1rem;
 }
 
-.league p {
+.team img {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.team p {
   background-color: rgba(114, 32, 207, 0.133);
   padding: 0.9rem;
   cursor: pointer;
   border-radius: 0.5rem;
   font-size: 0.75rem;
-}
-
-.league img {
-  width: 4rem;
-  height: 4rem;
-  margin-bottom: 1rem;
 }
