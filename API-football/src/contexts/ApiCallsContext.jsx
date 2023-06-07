@@ -1,6 +1,4 @@
-// apiContext.js
-
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { APIKeyContext } from "./APIKeyContext";
 
 export const ApiContext = createContext();
@@ -10,71 +8,77 @@ export const ApiProvider = ({ children }) => {
   const [countries, setCountries] = useState([]);
   const [leagues, setLeagues] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const getCountries = async () => {
+  const fetchApiData = async (url) => {
+    setIsLoading(true);
     try {
-      const response = await fetch(
-        "https://api-football-v1.p.rapidapi.com/v3/countries",
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": APIKey,
-          },
-        }
-      );
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+          "x-rapidapi-key": APIKey,
+        },
+      });
       const data = await response.json();
-      console.log(data.response);
-      // taking the 'null' country off
-      data.response.splice(164, 1);
-      setCountries(data.response);
+      return data;
     } catch (err) {
       console.log(err);
+      return null;
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const getLeagues = async (countryName) => {
-    try {
-      // need to fix this
-      localStorage.removeItem("leagues"); // Clear the previous leagues data
-      const response = await fetch(
-        `https://api-football-v1.p.rapidapi.com/v3/leagues?country=${countryName}`,
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": APIKey,
-          },
-        }
+  const getCountries = async () => {
+    const data = await fetchApiData(
+      "https://api-football-v1.p.rapidapi.com/v3/countries"
+    );
+    if (data) {
+      const filteredCountries = data.response.filter(
+        (country) => country.name !== "World"
       );
-      const data = await response.json();
-      console.log(data.response);
+      setCountries(filteredCountries);
+    }
+  };
+
+  const getLeagues = async (country) => {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/leagues?country=${country}`;
+    const data = await fetchApiData(url);
+    if (data) {
       setLeagues(data.response);
-      localStorage.setItem("leagues", JSON.stringify(data.response));
-    } catch (err) {
-      console.log(err);
+      sessionStorage.setItem("leagues", JSON.stringify(data.response));
     }
   };
 
   const getTeams = async (leagueId) => {
-    try {
-      const response = await fetch(
-        `https://api-football-v1.p.rapidapi.com/teams/league/${leagueId}`,
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": APIKey,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data.api.teams);
+    const url = `https://api-football-v1.p.rapidapi.com/teams/league/${leagueId}`;
+    const data = await fetchApiData(url);
+    if (data) {
       setTeams(data.api.teams);
-    } catch (err) {
-      console.log(err);
+      sessionStorage.setItem("teams", JSON.stringify(data.api.teams));
     }
   };
+
+  useEffect(() => {
+    const storedLeagues = sessionStorage.getItem("leagues");
+    if (storedLeagues && storedLeagues !== "undefined") {
+      setLeagues(JSON.parse(storedLeagues));
+    }
+
+    const storedTeams = sessionStorage.getItem("teams");
+    if (storedTeams && storedTeams !== "undefined") {
+      setTeams(JSON.parse(storedTeams));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(countries);
+  }, [countries]);
+
+  useEffect(() => {
+    console.log(leagues);
+  }, [leagues]);
 
   const contextValue = {
     countries,
@@ -84,6 +88,7 @@ export const ApiProvider = ({ children }) => {
     getCountries,
     getLeagues,
     getTeams,
+    isLoading
   };
 
   return (

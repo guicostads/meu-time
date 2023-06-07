@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { APIKeyContextProvider } from "./contexts/APIKeyContext";
-import { ApiProvider } from "./contexts/ApiCallsContext";
+import { ApiContext, ApiProvider } from "./contexts/ApiCallsContext";
 import "./App.css";
 
 function App() {

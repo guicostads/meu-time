@@ -26,29 +26,27 @@ export const APIKeyContextProvider = ({ children }) => {
       const data = await response.json();
       console.log(data);
 
-      // Check if the response has errors
       if (data.errors.length === 0) {
-        sessionStorage.setItem("APIKey", APIKey); // Store the API key in session storage
+        sessionStorage.setItem("APIKey", APIKey);
         navigate("/countries");
-        setIsLoading(false);
       }
     } catch (err) {
       setErrorMsg("API Key inválida.");
+    } finally {
       setIsLoading(false);
     }
   };
 
+  const contextValue = {
+    APIKey,
+    setAPIKey,
+    validateAPIKey,
+    isLoading,
+    errorMsg,
+  };
+
   return (
-    <APIKeyContext.Provider
-      value={{
-        APIKey,
-        setAPIKey,
-        validateAPIKey,
-        isLoading,
-        setIsLoading,
-        errorMsg,
-      }}
-    >
+    <APIKeyContext.Provider value={contextValue}>
       {children}
     </APIKeyContext.Provider>
   );
