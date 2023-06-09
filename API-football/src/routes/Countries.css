@@ -23,7 +23,7 @@ body {
 
 .country {
   display: grid;
-  width: 70%;
+  max-width: 60%;
   border: 3px solid #6464;
   border-radius: 0.5rem;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

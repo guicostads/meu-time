@@ -5,7 +5,7 @@ import "./Countries.css";
 
 const Countries = () => {
   // data from the api context
-  const { countries, getCountries, getLeagues, isLoading } =
+  const { apiData, getCountries, getLeagues, isLoading } =
     useContext(ApiContext);
 
   //get the data when the page loads
@@ -18,7 +18,7 @@ const Countries = () => {
       <h1>Escolha um país</h1>
       {isLoading ? <p className="loader"></p> : ''}
       <div className={isLoading ? 'hidden' : 'country'}>
-        {countries.map((country) => (
+        {apiData.countries.map((country) => (
           <Link to="/leagues" key={country.name} className={isLoading ? 'hidden' : ''}>
             <div
               onClick={() => {

@@ -5,10 +5,25 @@ export const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
   const { APIKey } = useContext(APIKeyContext);
-  const [countries, setCountries] = useState([]);
-  const [leagues, setLeagues] = useState([]);
-  const [teams, setTeams] = useState([]);
+  const [apiData, setApiData] = useState({
+    countries: [],
+    leagues: [],
+    teams: [],
+  });
+  const [isTeamData, setIsTeamData] = useState({
+    name: "",
+    logo: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
+
+  const getSelectedTeamData = (name, logo) => {
+    setIsTeamData({
+      ...isTeamData,
+      name: name,
+      logo: logo,
+    });
+    console.log(isTeamData);
+  };
 
   const fetchApiData = async (url) => {
     setIsLoading(true);
@@ -38,7 +53,10 @@ export const ApiProvider = ({ children }) => {
       const filteredCountries = data.response.filter(
         (country) => country.name !== "World"
       );
-      setCountries(filteredCountries);
+      setApiData((prevApiData) => ({
+        ...prevApiData,
+        countries: filteredCountries,
+      }));
     }
   };
 
@@ -46,7 +64,10 @@ export const ApiProvider = ({ children }) => {
     const url = `https://api-football-v1.p.rapidapi.com/v3/leagues?country=${country}`;
     const data = await fetchApiData(url);
     if (data) {
-      setLeagues(data.response);
+      setApiData((prevApiData) => ({
+        ...prevApiData,
+        leagues: data.response,
+      }));
       sessionStorage.setItem("leagues", JSON.stringify(data.response));
     }
   };
@@ -55,7 +76,10 @@ export const ApiProvider = ({ children }) => {
     const url = `https://api-football-v1.p.rapidapi.com/teams/league/${leagueId}`;
     const data = await fetchApiData(url);
     if (data) {
-      setTeams(data.api.teams);
+      setApiData((prevApiData) => ({
+        ...prevApiData,
+        teams: data.api.teams,
+      }));
       sessionStorage.setItem("teams", JSON.stringify(data.api.teams));
     }
   };
@@ -63,32 +87,38 @@ export const ApiProvider = ({ children }) => {
   useEffect(() => {
     const storedLeagues = sessionStorage.getItem("leagues");
     if (storedLeagues && storedLeagues !== "undefined") {
-      setLeagues(JSON.parse(storedLeagues));
+      setApiData((prevApiData) => ({
+        ...prevApiData,
+        leagues: JSON.parse(storedLeagues),
+      }));
     }
 
     const storedTeams = sessionStorage.getItem("teams");
     if (storedTeams && storedTeams !== "undefined") {
-      setTeams(JSON.parse(storedTeams));
+      setApiData((prevApiData) => ({
+        ...prevApiData,
+        teams: JSON.parse(storedTeams),
+      }));
     }
   }, []);
 
   useEffect(() => {
-    console.log(countries);
-  }, [countries]);
+    console.log(apiData.countries);
+  }, [apiData.countries]);
 
   useEffect(() => {
-    console.log(leagues);
-  }, [leagues]);
+    console.log(apiData.leagues);
+  }, [apiData.leagues]);
 
   const contextValue = {
-    countries,
-    leagues,
-    teams,
-    setLeagues,
+    apiData,
+    setApiData,
     getCountries,
     getLeagues,
     getTeams,
-    isLoading
+    isLoading,
+    getSelectedTeamData,
+    isTeamData,
   };
 
   return (

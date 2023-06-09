@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Leagues.css";
 
 const Leagues = () => {
-  const { leagues, getTeams, isLoading} = useContext(ApiContext);
+  const { apiData, leagues, getTeams, isLoading} = useContext(ApiContext);
 
 
 
@@ -14,7 +14,7 @@ const Leagues = () => {
      <h1>Escolha uma liga</h1>
      {isLoading ? <p className="loader"></p> : ''}
      <div className={isLoading ? 'hidden' : 'league'}>
-        {leagues.map((league) => (
+        {apiData.leagues.map((league) => (
           <Link to="/teams" className={isLoading ? 'hidden' : ''}>
             <div
               key={league.league.id}

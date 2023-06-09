@@ -5,6 +5,7 @@ import Login from "./routes/Login.jsx";
 import Countries from "./routes/Countries.jsx";
 import Leagues from "./routes/Leagues.jsx";
 import Teams from "./routes/Teams.jsx";
+import TeamData from "./routes/TeamData.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "/countries", element: <Countries /> },
       { path: "/leagues", element: <Leagues /> },
       { path: "/teams", element: <Teams /> },
+      {path: '/teamData', element: <TeamData />}
     ],
   },
 ]);

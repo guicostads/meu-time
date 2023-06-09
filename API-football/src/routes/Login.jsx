@@ -18,7 +18,7 @@ const Login = () => {
           onClick={() => setErrorMsg("")}
         />
         <button onClick={validateAPIKey}>
-          {isLoading ? <p className="loader"></p> : <span>Acessar</span>}
+          {isLoading ? <div className="loader"></div> : <span>Acessar</span>}
         </button>
         <span>{errorMsg}</span>
         <p>
